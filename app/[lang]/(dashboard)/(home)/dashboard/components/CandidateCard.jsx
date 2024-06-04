@@ -1,3 +1,4 @@
+// CandidateCard.js
 import React from 'react';
 
 const CandidateCard = ({ candidate }) => {
@@ -17,7 +18,7 @@ const CandidateCard = ({ candidate }) => {
           <div className="flex flex-col">
             <h2 className="text-xl font-bold">{candidate.name}</h2>
             <span className="text-gray-500 font-medium">
-              {candidate.title}
+              {candidate.area}
             </span>
           </div>
           <div className="flex flex-col items-end">
