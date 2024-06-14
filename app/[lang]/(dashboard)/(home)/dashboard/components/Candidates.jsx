@@ -1,4 +1,3 @@
-// Candidates.js
 import React, { useState } from 'react';
 import CandidateCard from './CandidateCard';
 import Filter from './Filter';
@@ -45,134 +44,6 @@ const candidates = [
     availability: 'Full-time',
     videoUrl: 'https://path-to-your-video.mp4',
   },
-  {
-    name: 'Anna',
-    area: 'Marketing Specialist',
-    description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.',
-    payRate: '$35 / per hour',
-    availability: 'Full-time',
-    videoUrl: 'https://path-to-your-video.mp4',
-  },
-  {
-    name: 'Steve',
-    area: 'Data Scientist',
-    description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.',
-    payRate: '$60 / per hour',
-    availability: 'Part-time',
-    videoUrl: 'https://path-to-your-video.mp4',
-  },
-  {
-    name: 'Laura',
-    area: 'Social Media Manager',
-    description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.',
-    payRate: '$5 / per hour',
-    availability: '20 or 40 hours per week',
-    videoUrl: 'https://path-to-your-video.mp4',
-  },
-  {
-    name: 'Tom',
-    area: 'Software Engineer',
-    description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.',
-    payRate: '$32 / per hour',
-    availability: 'Full-time',
-    videoUrl: 'https://path-to-your-video.mp4',
-  },
-  {
-    name: 'Olivia',
-    area: 'Product Manager',
-    description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.',
-    payRate: '$55 / per hour',
-    availability: 'Part-time',
-    videoUrl: 'https://path-to-your-video.mp4',
-  },
-  {
-    name: 'Henry',
-    area: 'Graphic Designer',
-    description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.',
-    payRate: '$27 / per hour',
-    availability: 'Full-time',
-    videoUrl: 'https://path-to-your-video.mp4',
-  },
-  {
-    name: 'Sophia',
-    area: 'Marketing Specialist',
-    description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.',
-    payRate: '$37 / per hour',
-    availability: 'Full-time',
-    videoUrl: 'https://path-to-your-video.mp4',
-  },
-  {
-    name: 'James',
-    area: 'Data Scientist',
-    description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.',
-    payRate: '$65 / per hour',
-    availability: 'Part-time',
-    videoUrl: 'https://path-to-your-video.mp4',
-  },
-  {
-    name: 'Emma',
-    area: 'Social Media Manager',
-    description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.',
-    payRate: '$6 / per hour',
-    availability: '20 or 40 hours per week',
-    videoUrl: 'https://path-to-your-video.mp4',
-  },
-  {
-    name: 'Daniel',
-    area: 'Software Engineer',
-    description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.',
-    payRate: '$35 / per hour',
-    availability: 'Full-time',
-    videoUrl: 'https://path-to-your-video.mp4',
-  },
-  {
-    name: 'Ava',
-    area: 'Product Manager',
-    description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.',
-    payRate: '$60 / per hour',
-    availability: 'Part-time',
-    videoUrl: 'https://path-to-your-video.mp4',
-  },
-  {
-    name: 'Ethan',
-    area: 'Graphic Designer',
-    description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.',
-    payRate: '$30 / per hour',
-    availability: 'Full-time',
-    videoUrl: 'https://path-to-your-video.mp4',
-  },
-  {
-    name: 'Mia',
-    area: 'Marketing Specialist',
-    description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.',
-    payRate: '$40 / per hour',
-    availability: 'Full-time',
-    videoUrl: 'https://path-to-your-video.mp4',
-  },
-  {
-    name: 'Lucas',
-    area: 'Data Scientist',
-    description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.',
-    payRate: '$70 / per hour',
-    availability: 'Part-time',
-    videoUrl: 'https://path-to-your-video.mp4',
-  },
-  {
-    name: 'Isabella',
-    area: 'Social Media Manager',
-    description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.',
-    payRate: '$7 / per hour',
-    availability: '20 or 40 hours per week',
-    videoUrl: 'https://path-to-your-video.mp4',
-  },
-  {
-    name: 'Jack',
-    area: 'Software Engineer',
-    description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.',
-    payRate: '$40 / per hour',
-    availability: 'Full-time',
-    videoUrl: 'https://path-to-your-video.mp4',
-  },
 ];
 
 const Candidates = () => {
@@ -202,6 +73,66 @@ const Candidates = () => {
     setCurrentPage((prevPage) => Math.min(prevPage + 1, totalPages));
   };
 
+  const getPaginationItems = () => {
+    const paginationItems = [];
+    const startPage = Math.max(1, currentPage - 4);
+    const endPage = Math.min(totalPages, currentPage + 4);
+
+    if (startPage > 1) {
+      paginationItems.push(
+        <PaginationItem key={1}>
+          <PaginationLink href="#" onClick={() => setCurrentPage(1)}>
+            1
+          </PaginationLink>
+        </PaginationItem>
+      );
+      if (startPage > 2) {
+        paginationItems.push(
+          <PaginationItem key="startEllipsis">
+            <PaginationLink href="#" disabled>
+              ...
+            </PaginationLink>
+          </PaginationItem>
+        );
+      }
+    }
+
+    for (let page = startPage; page <= endPage; page++) {
+      paginationItems.push(
+        <PaginationItem key={page}>
+          <PaginationLink
+            href="#"
+            onClick={() => setCurrentPage(page)}
+            isActive={currentPage === page}
+          >
+            {page}
+          </PaginationLink>
+        </PaginationItem>
+      );
+    }
+
+    if (endPage < totalPages) {
+      if (endPage < totalPages - 1) {
+        paginationItems.push(
+          <PaginationItem key="endEllipsis">
+            <PaginationLink href="#" disabled>
+              ...
+            </PaginationLink>
+          </PaginationItem>
+        );
+      }
+      paginationItems.push(
+        <PaginationItem key={totalPages}>
+          <PaginationLink href="#" onClick={() => setCurrentPage(totalPages)}>
+            {totalPages}
+          </PaginationLink>
+        </PaginationItem>
+      );
+    }
+
+    return paginationItems;
+  };
+
   return (
     <div>
       <h1 className="text-2xl font-bold mb-4">Candidates</h1>
@@ -218,17 +149,7 @@ const Candidates = () => {
             <PaginationItem>
               <PaginationPrevious href="#" onClick={handlePreviousPage} disabled={currentPage === 1} />
             </PaginationItem>
-            {Array.from({ length: totalPages }, (_, index) => (
-              <PaginationItem key={index}>
-                <PaginationLink
-                  href="#"
-                  onClick={() => setCurrentPage(index + 1)}
-                  isActive={currentPage === index + 1}
-                >
-                  {index + 1}
-                </PaginationLink>
-              </PaginationItem>
-            ))}
+            {getPaginationItems()}
             <PaginationItem>
               <PaginationNext href="#" onClick={handleNextPage} disabled={currentPage === totalPages} />
             </PaginationItem>
