@@ -6,7 +6,6 @@ export function useMounted() {
   React.useEffect(() => {
     setMounted(true);
   }, []);
-  // rturn
 
   return mounted;
 }
